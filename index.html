@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,viewport-fit=cover"
+    />
+    <meta name="theme-color" content="#202423" />
+    <title>LAYER · A little imagination, in motion.</title>
+  </head>
+  <body>
+    <header>
+      <div class="logo">▱ <b>LAYER</b><span>DRAW. MOVE. MAKE.</span></div>
+      <nav>
+        <button id="new">New</button><button id="open">Open</button
+        ><button id="save">Save project</button
+        ><button id="import">Import image</button>
+      </nav>
+      <button id="export" class="accent">Export ↗</button>
+    </header>
+    <div class="document-bar">
+      <div>
+        <span class="doc-dot"></span
+        ><input
+          id="doc-name"
+          aria-label="Project name"
+          value="Quiet hours"
+        /><span id="save-status">Your canvas, your world.</span>
+      </div>
+      <div class="view-tabs">
+        <button id="paint-tab" class="active">Canvas</button
+        ><button id="three-tab">3D workshop <span>✧</span></button>
+      </div>
+      <button id="help" aria-label="Help">?</button>
+    </div>
+    <main>
+      <aside class="tools">
+        <div class="tool-group" id="tools"></div>
+        <div class="tool-colors">
+          <input
+            type="color"
+            id="color"
+            aria-label="Paint color"
+            value="#f3b86c"
+          /><button id="swap" title="Swap foreground and background">⇄</button
+          ><input
+            type="color"
+            id="background-color"
+            aria-label="Background color"
+            value="#203b40"
+          />
+        </div>
+        <button id="undo" title="Undo (Ctrl Z)">↶</button
+        ><button id="redo" title="Redo (Ctrl Shift Z)">↷</button>
+      </aside>
+      <section class="workspace">
+        <div class="options">
+          <strong id="tool-name">Pencil</strong
+          ><label
+            >Size
+            <input
+              id="size"
+              aria-label="Brush size"
+              type="range"
+              min="1"
+              max="32"
+              value="2"
+            /><output id="size-value">2 px</output></label
+          ><label><input type="checkbox" id="mirror" /> Mirror</label
+          ><label><input type="checkbox" id="filled" /> Fill shapes</label
+          ><label><input type="checkbox" id="grid" /> Grid</label
+          ><select id="zoom" aria-label="Zoom">
+            <option value="fit">Fit</option>
+            <option value="1">100%</option>
+            <option value="2">200%</option>
+            <option value="4">400%</option>
+            <option value="8">800%</option>
+          </select>
+        </div>
+        <div id="canvas-space">
+          <div id="canvas-wrap">
+            <canvas id="art" width="128" height="128"></canvas
+            ><canvas
+              id="overlay"
+              width="128"
+              height="128"
+              aria-label="Drawing canvas"
+            ></canvas>
+          </div>
+          <div class="canvas-caption">
+            <span>MAKE SOMETHING ONLY YOU COULD MAKE.</span
+            ><span id="coords">128 × 128 px</span>
+          </div>
+        </div>
+        <div id="three-space" hidden>
+          <canvas id="three-canvas"></canvas>
+          <div class="three-controls">
+            <span class="eyebrow">IMAGE → THREE.JS</span>
+            <h2>Give your ideas<br />another dimension.</h2>
+            <label
+              >Build as
+              <select id="mesh-type">
+                <option value="relief">Height relief</option>
+                <option value="card">Sprite card</option>
+                <option value="box">Texture cube</option>
+              </select></label
+            ><label
+              >Depth
+              <input
+                id="depth"
+                type="range"
+                min="0"
+                max="3"
+                step=".05"
+                value="1.2" /></label
+            ><button id="refresh-3d">Update from canvas</button
+            ><button id="export-glb" class="accent">Export .glb ↗</button>
+            <p>
+              Drag to orbit · Scroll / pinch to zoom.<br />Relief uses image
+              brightness as height.
+            </p>
+          </div>
+        </div>
+        <section class="timeline">
+          <div class="timeline-head">
+            <div>
+              <button id="play" aria-label="Play animation">▶</button
+              ><span>ANIMATION</span
+              ><label
+                ><input
+                  id="fps"
+                  aria-label="Frames per second"
+                  type="number"
+                  min="1"
+                  max="30"
+                  value="10"
+                />
+                FPS</label
+              >
+            </div>
+            <div>
+              <label><input type="checkbox" id="onion" /> Onion skin</label
+              ><button id="add-frame" title="Add blank frame">＋ Frame</button
+              ><button id="duplicate-frame" title="Duplicate current frame">
+                ⧉</button
+              ><button id="delete-frame" title="Delete current frame">−</button>
+            </div>
+          </div>
+          <div id="frames"></div>
+        </section>
+      </section>
+      <aside class="inspector">
+        <section class="preview-section">
+          <div class="section-heading">
+            NAVIGATOR <span id="frame-number">01 / 08</span>
+          </div>
+          <canvas id="preview" width="128" height="128"></canvas>
+          <p id="preview-hint">A little imagination, in motion.</p>
+        </section>
+        <section>
+          <div class="section-heading">
+            PALETTE
+            <select id="palette-select" aria-label="Palette">
+              <option>Wildwater</option>
+              <option>Gameboy</option>
+              <option>Sunset</option>
+              <option>Studio</option>
+            </select>
+          </div>
+          <div id="palette"></div>
+          <div id="hex">#F3B86C</div>
+        </section>
+        <section class="layers-section">
+          <div class="section-heading">
+            LAYERS <button id="add-layer" title="Add layer">＋</button>
+          </div>
+          <div id="layers"></div>
+          <div class="layer-props">
+            <label
+              >Opacity
+              <input
+                id="opacity"
+                type="range"
+                min="0"
+                max="1"
+                step=".05"
+                value="1" /></label
+            ><select id="blend" aria-label="Layer blend mode">
+              <option value="source-over">Normal</option>
+              <option value="multiply">Multiply</option>
+              <option value="screen">Screen</option>
+              <option value="overlay">Overlay</option>
+              <option value="lighter">Add</option>
+            </select>
+          </div>
+          <div class="layer-actions">
+            <button id="layer-up" title="Move layer up">↑</button
+            ><button id="layer-down" title="Move layer down">↓</button
+            ><button id="merge" title="Merge down">Merge ↓</button
+            ><button id="delete-layer" title="Delete layer">×</button>
+          </div>
+        </section>
+        <section class="selection-actions">
+          <div class="section-heading">SELECTION</div>
+          <div>
+            <button id="copy">Copy</button><button id="cut">Cut</button
+            ><button id="paste">Paste</button
+            ><button id="clear-selection">Deselect</button>
+          </div>
+        </section>
+      </aside>
+    </main>
+    <footer>
+      <span id="status" role="status"
+        >Ready. Pick a tool and make your mark.</span
+      ><span id="doc-info">128 × 128 · RGBA</span
+      ><button id="panels">Panels</button>
+    </footer>
+    <input id="file-input" type="file" accept="image/*" multiple hidden /><input
+      id="project-input"
+      type="file"
+      accept=".layer,.json"
+      hidden
+    />
+    <dialog id="dialog">
+      <div class="dialog-head">
+        <h2 id="dialog-title"></h2>
+        <button id="dialog-close" aria-label="Close">✕</button>
+      </div>
+      <div id="dialog-content"></div>
+    </dialog>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
