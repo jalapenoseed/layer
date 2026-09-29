@@ -1,5 +1,11 @@
 # LAYER
 
+**MS Paint meets pixel animation and Three.js — open source, local-first, and built for the browser.**
+
+## Start here
+
+New to the project? Read [ELI5.md](docs/ELI5.md). For release copy, search wording, and social descriptions, see [SEO.md](docs/SEO.md).
+
 A modern JavaScript paint and animation studio inspired by the original LAYER / PocketPaint experiments and MS Paint / Jasc Animation Shop. Canvas 2D handles exact pixel editing; Three.js powers the image-to-mesh workshop.
 
 ## Run
@@ -38,3 +44,7 @@ B pencil, E erase, F fill, I picker, L line, R rectangle, O ellipse, T triangle,
 Three.js 0.186.1 · Vite 8.3.1 · gifenc 1.0.3. Tests cover fill boundaries, line continuity and malformed-project rejection. Exported GIF uses 1-bit alpha; PNG and GLB preserve full texture alpha. The original LAYER source archive was not found; this is a fresh rebuild from recovered feature notes.
 
 On Windows, double-click `START.cmd` to install dependencies if needed and open the app.
+
+## License
+
+MIT. See [LICENSE](LICENSE).
